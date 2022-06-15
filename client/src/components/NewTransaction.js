@@ -15,6 +15,9 @@ export const NewTransaction = () => {
       amount: +amount
     }
     addTransaction(NewTransaction);
+    
+    setText("");
+    setamount(0);
   }
   return (
     <div>

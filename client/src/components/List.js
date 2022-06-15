@@ -1,10 +1,15 @@
-import React , {useContext} from 'react'
+import { get } from 'mongoose';
+import React , {useContext, useEffect} from 'react'
 import { ContextGlobal } from '../context/StateGlobal'
 import { Transaction } from './Transaction';
 
 export const List = () => {
-const {transactions}=useContext(ContextGlobal);
+const {transactions, getTransactions}=useContext(ContextGlobal);
 
+  useEffect(()=>{
+    getTransactions();
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
   return (
     <>
         <h3>History</h3>
