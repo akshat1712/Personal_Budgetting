@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
 
 const connectDB = async () => {
   console.log(process.env.MONGO_DB);

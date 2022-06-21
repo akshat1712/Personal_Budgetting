@@ -1,21 +1,22 @@
-import { get } from 'mongoose';
-import React , {useContext, useEffect} from 'react'
-import { ContextGlobal } from '../context/StateGlobal'
+import React, { useContext, useEffect } from 'react';
 import { Transaction } from './Transaction';
 
-export const List = () => {
-const {transactions, getTransactions}=useContext(ContextGlobal);
+import { GlobalContext } from '../context/StateGlobal';
 
-  useEffect(()=>{
+export const TransactionList = () => {
+  const { transactions, getTransactions } = useContext(GlobalContext);
+
+  useEffect(() => {
     getTransactions();
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-  },[]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <>
-        <h3>History</h3>
-        <ul  className="list">
-          { transactions.map( transactions=>( <Transaction key={transactions.id} transaction={transactions}/> ))}
-        </ul>
+      <h3>History</h3>
+      <ul className="list">
+        {transactions.map(transaction => (<Transaction key={transaction._id} transaction={transaction} />))}
+      </ul>
     </>
   )
 }

@@ -1,9 +1,8 @@
-import React,{useContext} from 'react'
+import React, { useContext } from 'react';
+import { GlobalContext } from '../context/StateGlobal';
 
-import { ContextGlobal } from '../context/StateGlobal'
-export const CreditDebit = () => {
-
-  const {transactions}=useContext(ContextGlobal);
+export const IncomeExpenses = () => {
+  const { transactions } = useContext(GlobalContext);
 
   const amounts = transactions.map(transaction => transaction.amount);
 
@@ -18,17 +17,15 @@ export const CreditDebit = () => {
   ).toFixed(2);
 
   return (
-    <div>
-        <div className="inc-exp-container">
+    <div className="inc-exp-container">
         <div>
           <h4>Income</h4>
-          <p  className="money plus">&#8377;{income}</p>
+  <p className="money plus">&income</p>
         </div>
         <div>
           <h4>Expense</h4>
-          <p  className="money minus">&#8377;{expense}</p>
+  <p className="money minus">&expense</p>
         </div>
       </div>
-    </div>
   )
 }

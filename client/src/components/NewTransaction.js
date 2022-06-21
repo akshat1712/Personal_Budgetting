@@ -1,45 +1,40 @@
-import React ,{useState,useContext} from 'react'
+import React, {useState, useContext} from 'react'
+import { GlobalContext } from '../context/StateGlobal';
 
-import { ContextGlobal } from '../context/StateGlobal'
-export const NewTransaction = () => {
+export const AddTransaction = () => {
+  const [text, setText] = useState('');
+  const [amount, setAmount] = useState(0);
 
-  const {addTransaction}= useContext(ContextGlobal);
-  const [text,setText]=useState("");
-  const [amount,setamount]=useState(0);
-  const onSubmit = e =>{
+  const { addTransaction } = useContext(GlobalContext);
+
+  const onSubmit = e => {
     e.preventDefault();
 
-    const NewTransaction= {
-      id: Math.floor(Math.random() * 100000000),
+    const newTransaction = {
       text,
       amount: +amount
     }
-    addTransaction(NewTransaction);
-    
-    setText("");
-    setamount(0);
+
+    addTransaction(newTransaction);
   }
+
   return (
-    <div>
-        <h3>Add new transaction</h3>
-        <form onSubmit={onSubmit}>
+    <>
+      <h3>Add new transaction</h3>
+      <form onSubmit={onSubmit}>
         <div className="form-control">
           <label htmlFor="text">Text</label>
-          <input type="text" value={text} onChange= {(event)=>{
-            setText(event.target.value);
-          }}  placeholder="Enter text..." />
+          <input type="text" value={text} onChange={(e) => setText(e.target.value)} placeholder="Enter text..." />
         </div>
         <div className="form-control">
           <label htmlFor="amount"
             >Amount <br />
-            ( Expense: -, Income: + )</label
+            (negative - expense, positive - income)</label
           >
-          <input type="number" value={amount} onChange= {(event)=>{
-            setamount(event.target.value);
-          }} placeholder="Enter amount..." />
+          <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="Enter amount..." />
         </div>
         <button className="btn">Add transaction</button>
-        </form>
-    </div>
+      </form>
+    </>
   )
 }
