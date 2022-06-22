@@ -21,6 +21,8 @@ exports.addTransaction = async (req, res, next) => {
   try {
     const { text, amount } = req.body;
 
+    const count = await Transaction.countDocuments({text:text});
+    console.log(count);
     const transaction = await Transaction.create(req.body);
   
     return res.status(201).json({
