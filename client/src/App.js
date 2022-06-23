@@ -5,6 +5,7 @@ import { IncomeExpenses } from './components/CreditDebit';
 import { TransactionList } from './components/List';
 import { AddTransaction } from './components/NewTransaction';
 import { GlobalProvider } from './context/StateGlobal';
+import { Chart } from './components/Chart';
 
 import './App.css';
 
@@ -18,6 +19,7 @@ function App() {
         <AddTransaction />
         <TransactionList />
       </div>
+      {/* <Chart/> */}
     </GlobalProvider>
   );
 }

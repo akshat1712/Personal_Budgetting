@@ -59,10 +59,25 @@ export const GlobalProvider = ({ children }) => {
     try {
       const res = await axios.post('/api/v1/transactions', transaction, config);
 
-      dispatch({
-        type: 'ADD_TRANSACTION',
-        payload: res.data.data
-      });
+      // console.log(res.data.data[0]);
+
+      if(res.data.repeat==0)
+      {
+        dispatch({
+          type: 'ADD_TRANSACTION',
+          payload: res.data.data[0]
+        });
+      }
+      else
+      {
+        // console.log(res.data.data[0]);
+        dispatch({
+          type:'UPDATE_TRANSACTION',
+          payload: res.data.data[0]
+        })
+      }
+
+
     } catch (err) {
       dispatch({
         type: 'TRANSACTION_ERROR',

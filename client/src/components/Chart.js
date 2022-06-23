@@ -1,21 +1,15 @@
-import React, { useContext, useEffect } from 'react';
+import { Bar } from 'react-chartjs-2';
 
-
-import { GlobalContext } from '../context/StateGlobal';
+import React from 'react'
 
 export const Chart = () => {
-  const { transactions, getTransactions } = useContext(GlobalContext);
-
-  useEffect(() => {
-    getTransactions();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const data=[]
-  for( const transaction of transactions)
-    data.push( {"Item":transaction.text,"Amount":transaction.amount});
-  
-    return (
-      <h2>Hello</h2>
-    );
+  return (
+    <Bar
+    data={{
+      labels:['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange']
+    }} 
+    width={100} height={100}
+    />
+  )
 }
+

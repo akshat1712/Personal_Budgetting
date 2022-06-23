@@ -1,4 +1,4 @@
-const Transaction = require('../models/Transactions');
+const Transaction = require("../models/Transactions");
 
 exports.getTransactions = async (req, res, next) => {
   try {
@@ -7,53 +7,62 @@ exports.getTransactions = async (req, res, next) => {
     return res.status(200).json({
       success: true,
       count: transactions.length,
-      data: transactions
+      data: transactions,
     });
   } catch (err) {
     return res.status(500).json({
       success: false,
-      error: 'Server Error'
+      error: "Server Error",
     });
   }
-}
+};
 
 exports.addTransaction = async (req, res, next) => {
   try {
     const { text, amount } = req.body;
 
-    const count = await Transaction.countDocuments({text:text});
-    console.log(count);
-    const transaction = await Transaction.create(req.body);
-  
+    const count = await Transaction.countDocuments({ text: text });
+
+    let repeat=1;
+    if (count == 0) {
+      await Transaction.create(req.body);
+      repeat=0;
+    } else {
+      await Transaction.updateOne({ text: text }, { $inc: { amount: parseInt(amount) } });
+    }
+
+    const transaction = await Transaction.find({ text: text });
+
     return res.status(201).json({
       success: true,
-      data: transaction
-    }); 
+      data: transaction,
+      repeat:repeat
+    });
   } catch (err) {
-    if(err.name === 'ValidationError') {
-      const messages = Object.values(err.errors).map(val => val.message);
+    if (err.name === "ValidationError") {
+      const messages = Object.values(err.errors).map((val) => val.message);
 
       return res.status(400).json({
         success: false,
-        error: messages
+        error: messages,
       });
     } else {
       return res.status(500).json({
         success: false,
-        error: 'Server Error'
+        error: "Server Error",
       });
     }
   }
-}
+};
 
 exports.deleteTransaction = async (req, res, next) => {
   try {
     const transaction = await Transaction.findById(req.params.id);
 
-    if(!transaction) {
+    if (!transaction) {
       return res.status(404).json({
         success: false,
-        error: 'No transaction found'
+        error: "No transaction found",
       });
     }
 
@@ -61,13 +70,12 @@ exports.deleteTransaction = async (req, res, next) => {
 
     return res.status(200).json({
       success: true,
-      data: {}
+      data: {},
     });
-
   } catch (err) {
     return res.status(500).json({
       success: false,
-      error: 'Server Error'
+      error: "Server Error",
     });
   }
-}
+};

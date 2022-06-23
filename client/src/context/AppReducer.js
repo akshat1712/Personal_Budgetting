@@ -16,6 +16,22 @@ export default (state, action) => {
           ...state,
           transactions: [...state.transactions, action.payload]
         }
+      case 'UPDATE_TRANSACTION':{
+        const new_transactions=state.transactions;
+
+        for( const index in new_transactions){
+          console.log(new_transactions[index]);
+          if( new_transactions[index].text==action.payload.text)
+            new_transactions[index]=action.payload;
+        }
+
+        console.log(new_transactions);
+
+        return{
+          ...state,
+          transactions:new_transactions
+        }
+      }
       case 'TRANSACTION_ERROR':
         return {
           ...state,
