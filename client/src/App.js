@@ -5,7 +5,7 @@ import { IncomeExpenses } from './components/CreditDebit';
 import { TransactionList } from './components/List';
 import { AddTransaction } from './components/NewTransaction';
 import { GlobalProvider } from './context/StateGlobal';
-import { Chart } from './components/Chart';
+import  Chart  from './components/Chart';
 
 import './App.css';
 
@@ -18,8 +18,9 @@ function App() {
         <Balance />
         <AddTransaction />
         <TransactionList />
+        <h3>Expense Pie Chart</h3>
+        <Chart/>
       </div>
-      {/* <Chart/> */}
     </GlobalProvider>
   );
 }
