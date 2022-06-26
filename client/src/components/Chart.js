@@ -111,7 +111,7 @@ export default function Chart() {
         activeShape={renderActiveShape}
         data={data}
         cx={230}
-        cy={120}
+        cy={140}
         innerRadius={55}
         outerRadius={85}
         fill="#e96b28"
