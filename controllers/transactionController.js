@@ -23,12 +23,15 @@ exports.addTransaction = async (req, res, next) => {
 
     const count = await Transaction.countDocuments({ text: text });
 
-    let repeat=1;
+    let repeat = 1;
     if (count == 0) {
       await Transaction.create(req.body);
-      repeat=0;
+      repeat = 0;
     } else {
-      await Transaction.updateOne({ text: text }, { $inc: { amount: parseInt(amount) } });
+      await Transaction.updateOne(
+        { text: text },
+        { $inc: { amount: parseInt(amount) } }
+      );
     }
 
     const transaction = await Transaction.find({ text: text });
@@ -36,7 +39,7 @@ exports.addTransaction = async (req, res, next) => {
     return res.status(201).json({
       success: true,
       data: transaction,
-      repeat:repeat
+      repeat: repeat,
     });
   } catch (err) {
     if (err.name === "ValidationError") {
