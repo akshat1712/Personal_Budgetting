@@ -1,5 +1,5 @@
-import React, { useCallback, useState,useContext } from "react";
-import { GlobalContext } from '../context/StateGlobal';
+import React, { useCallback, useState, useContext } from "react";
+import { GlobalContext } from "../context/StateGlobal";
 
 import { PieChart, Pie, Sector } from "recharts";
 
@@ -7,7 +7,7 @@ let data = [
   { name: "Group A", value: 100 },
   { name: "Group B", value: 100 },
   { name: "Group C", value: 100 },
-  { name: "Group D", value: 100 }
+  { name: "Group D", value: 100 },
 ];
 
 const renderActiveShape = (props: any) => {
@@ -23,7 +23,7 @@ const renderActiveShape = (props: any) => {
     fill,
     payload,
     percent,
-    value
+    value,
   } = props;
   const sin = Math.sin(-RADIAN * midAngle);
   const cos = Math.cos(-RADIAN * midAngle);
@@ -86,16 +86,15 @@ const renderActiveShape = (props: any) => {
 export default function Chart() {
   const { transactions } = useContext(GlobalContext);
 
-  let new_data=[];
-  for( const entry of transactions){
-    if( entry.amount<0)
-    {
-      new_data.push({name:entry.text,value:Math.abs(entry.amount)});
+  let new_data = [];
+  for (const entry of transactions) {
+    if (entry.amount < 0) {
+      new_data.push({ name: entry.text, value: Math.abs(entry.amount) });
     }
   }
 
-  data=new_data;
-  
+  data = new_data;
+
   const [activeIndex, setActiveIndex] = useState(0);
   const onPieEnter = useCallback(
     (_, index) => {

@@ -1,13 +1,13 @@
-import React from 'react';
-import { Header } from './components/Header';
-import { Balance } from './components/Balance';
-import { IncomeExpenses } from './components/CreditDebit';
-import { TransactionList } from './components/List';
-import { AddTransaction } from './components/NewTransaction';
-import { GlobalProvider } from './context/StateGlobal';
-import  Chart  from './components/Chart';
+import React from "react";
+import { Header } from "./components/Header";
+import { Balance } from "./components/Balance";
+import { IncomeExpenses } from "./components/CreditDebit";
+import { TransactionList } from "./components/List";
+import { AddTransaction } from "./components/NewTransaction";
+import { GlobalProvider } from "./context/StateGlobal";
+import Chart from "./components/Chart";
 
-import './App.css';
+import "./App.css";
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
         <AddTransaction />
         <TransactionList />
         <h3>Expense Pie Chart</h3>
-        <Chart/>
+        <Chart />
       </div>
     </GlobalProvider>
   );
